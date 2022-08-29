@@ -1,6 +1,6 @@
 import factory.fuzzy
-from faker import Faker
 from django.contrib.auth import get_user_model
+from faker import Faker
 
 from glucose.models import Glucose, UserProfile
 
@@ -17,7 +17,10 @@ class UserFactory(factory.django.DjangoModelFactory):
 
 
 class UserProfileFactory(factory.django.DjangoModelFactory):
-    user = factory.SubFactory(UserFactory)
+    class Meta:
+        model = UserProfile
+
+    user = factory.RelatedFactory(UserFactory)
 
 
 class GlucoseFactory(factory.django.DjangoModelFactory):
@@ -26,7 +29,7 @@ class GlucoseFactory(factory.django.DjangoModelFactory):
 
     user = factory.SubFactory(UserProfileFactory)
     gerät = fake.text(max_nb_chars=5)
-    seriennummer = fake.sentence(nb_words=5)
+    seriennummer = fake.text(max_nb_chars=5)
     aufzeichnungstyp = fake.random_int(min=0, max=4)
     glukosewert = fake.random_int(min=0, max=4)
     gerätezeitstempel = "2021-09-04T22:14:18Z"

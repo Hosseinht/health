@@ -22,8 +22,6 @@ class Glucose(models.Model):
     glukosewert = models.PositiveSmallIntegerField(help_text='Verlauf mg/dL')
     gerätezeitstempel = models.DateTimeField(default=timezone.now)
 
-
-
     class Meta:
         verbose_name = 'Glucose'
         verbose_name_plural = 'Glucose'

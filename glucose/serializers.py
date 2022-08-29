@@ -6,7 +6,7 @@ from .models import Glucose, UserProfile
 class GlucoseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Glucose
-        fields = ["glukosewert", "gerätezeitstempel"]
+        fields = ["glukosewert", "gerätezeitstempel", ]
 
 
 class GlucosePostSerializer(serializers.ModelSerializer):
@@ -33,7 +33,7 @@ class GlucoseDetailSerializer(serializers.ModelSerializer):
             "seriennummer",
             "aufzeichnungstyp",
             "glukosewert",
-            "gerätezeitstempel",
+            "gerätezeitstempel"
         ]
 
 

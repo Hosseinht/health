@@ -7,7 +7,15 @@ from .models import Glucose, UserProfile
 class GlucoseImportExport(ExportMixin, admin.ModelAdmin):
     model = Glucose
 
-    list_display = ['user', 'gerät', 'seriennummer', 'aufzeichnungstyp', 'glukosewert','gerätezeitstempel']
+    list_display = [
+        "id",
+        "user",
+        "gerät",
+        "seriennummer",
+        "aufzeichnungstyp",
+        "glukosewert",
+        "gerätezeitstempel",
+    ]
 
 
 admin.site.register(Glucose, GlucoseImportExport)
