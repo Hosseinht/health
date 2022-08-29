@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from .models import Glucose, UserProfile
 
+
 class GlucoseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Glucose
