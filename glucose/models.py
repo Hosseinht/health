@@ -25,3 +25,6 @@ class Glucose(models.Model):
     class Meta:
         verbose_name = 'Glucose'
         verbose_name_plural = 'Glucose'
+
+    def __str__(self):
+        return self.user.user.username

@@ -12,7 +12,7 @@ class GlucoseListView(generics.ListCreateAPIView):
     queryset = UserProfile.objects.all()
 
     filter_backends = [DjangoFilterBackend, OrderingFilter]
-    # filterset_class = GlucoseFilter
+
 
     def get_serializer_class(self):
         if self.request.method == "POST":

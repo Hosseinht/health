@@ -2,7 +2,6 @@ from rest_framework import serializers
 
 from .models import Glucose, UserProfile
 
-
 class GlucoseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Glucose
@@ -39,6 +38,7 @@ class GlucoseDetailSerializer(serializers.ModelSerializer):
 
 class UserProfileSerializer(serializers.ModelSerializer):
     glucose = serializers.SerializerMethodField()
+    user = serializers.SlugRelatedField(slug_field='username', read_only=True)
 
     def get_glucose(self, obj):
         # limit number of glucose level to 2
