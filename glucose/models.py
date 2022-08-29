@@ -7,16 +7,22 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
+
+
 class Glucose(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='glucose')
     gerät = models.CharField(max_length=200)
     seriennummer = models.CharField(max_length=200)
     aufzeichnungstyp = models.PositiveSmallIntegerField(default=0)
     glukosewert = models.PositiveSmallIntegerField(help_text='Verlauf mg/dL')
     gerätezeitstempel = models.DateTimeField(default=timezone.now)
 
-    def __str__(self):
-        return self.user.username
+
 
     class Meta:
         verbose_name = 'Glucose'

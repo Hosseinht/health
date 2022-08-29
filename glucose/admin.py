@@ -1,5 +1,14 @@
 from django.contrib import admin
+from import_export.admin import ExportMixin
 
-from .models import Glucose
+from .models import Glucose, UserProfile
 
-admin.site.register(Glucose)
+
+class GlucoseImportExport(ExportMixin, admin.ModelAdmin):
+    model = Glucose
+
+    list_display = ['user', 'gerät', 'seriennummer', 'aufzeichnungstyp', 'glukosewert','gerätezeitstempel']
+
+
+admin.site.register(Glucose, GlucoseImportExport)
+admin.site.register(UserProfile)
