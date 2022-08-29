@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from rest_framework import generics
 
-# Create your views here.
+from .models import Glucose
+from .serializers import GlucoseSerializer
+
+
+class GlucoseListView(generics.ListCreateAPIView):
+    queryset = Glucose.objects.all()
+    serializer_class = GlucoseSerializer
+
+
+class GlucoseRetrieveView(generics.RetrieveAPIView):
+    queryset = Glucose.objects.all()
+    serializer_class = GlucoseSerializer
