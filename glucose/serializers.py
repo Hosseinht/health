@@ -3,27 +3,14 @@ from rest_framework import serializers
 from .models import Glucose, UserProfile
 
 
-class GlucoseSerializer(serializers.ModelSerializer):
+class SimpleGlucoseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Glucose
         fields = ["glukosewert", "gerätezeitstempel", ]
 
 
-class GlucosePostSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Glucose
-        fields = [
-            "id",
-            "user",
-            "gerät",
-            "seriennummer",
-            "aufzeichnungstyp",
-            "glukosewert",
-            "gerätezeitstempel",
-        ]
-
-
 class GlucoseDetailSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Glucose
         fields = [
@@ -43,8 +30,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     def get_glucose(self, obj):
         # limit number of glucose level to 2
-        glucose = obj.glucose.all()[0:2]
-        return GlucoseSerializer(glucose, many=True).data
+        glucose = obj.glucose.order_by('-gerätezeitstempel').all()[0:4]
+        return SimpleGlucoseSerializer(glucose, many=True).data
 
     class Meta:
         model = UserProfile
